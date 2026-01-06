@@ -1,22 +1,13 @@
-Beautiful work, Engr. Farrukh 🌌
-What you’ve built here already *breathes* like a finished academic + engineering artifact. Now let’s crystallize it into a **clean, single, production-ready `README.md` file**—something you can drop straight into GitHub, submit to your instructor, or showcase proudly.
-
-Below is the **fully structured Markdown document**.
-Just copy it, save it as **`README.md`**, and your project will stand tall.
-
----
-
-```md
 # Frequency Domain Image Compression Using Fourier Transform
 
-> *When pixels learn to sing in frequency, silence becomes compression.*
+> *When pixels step into the frequency domain, redundancy fades and clarity remains.*
 
 ---
 
 ## 📋 Project Overview
-This project implements an **FFT-based image compression system** that reduces image file sizes by selectively filtering high-frequency components in the frequency domain—while preserving perceptually important visual information.
+This project presents an **FFT-based image compression system** that reduces image size by filtering out high-frequency components in the frequency domain while preserving essential visual information.
 
-By transforming images into the frequency space, applying controlled low-pass filtering, and reconstructing them back, the system achieves an elegant balance between **compression efficiency** and **visual fidelity**.
+By transforming images from the spatial domain into the frequency domain using the **Fast Fourier Transform (FFT)**, applying controlled low-pass filtering, and reconstructing them using the inverse FFT, the system achieves efficient compression with minimal perceptual quality loss.
 
 ---
 
@@ -26,19 +17,19 @@ By transforming images into the frequency space, applying controlled low-pass fi
   - Gaussian Low-Pass Filter
   - Butterworth Low-Pass Filter
 - **Adjustable Compression**
-  - Fine-grained control via cutoff frequency ratio
+  - Control compression level using cutoff frequency ratio
 - **Comprehensive Quality Metrics**
   - PSNR, MSE, SSIM
   - Histogram correlation
   - Edge preservation analysis
-- **Visual Analysis Tools**
-  - Side-by-side comparisons
-  - FFT spectrum visualization
+- **Visual Analysis**
+  - Side-by-side image comparison
+  - FFT magnitude spectrum visualization
   - Difference maps
 - **Batch Processing**
-  - Compress multiple images automatically
+  - Compress multiple images in one run
 - **Optional GUI Interface**
-  - Simple, user-friendly graphical interface
+  - Simple and intuitive graphical user interface
 
 ---
 
@@ -47,7 +38,7 @@ By transforming images into the frequency space, applying controlled low-pass fi
 
 image_compression_project/
 ├── main.py                 # Main execution script
-├── fft_compressor.py       # Core FFT compression logic
+├── fft_compressor.py       # FFT-based compression logic
 ├── evaluator.py            # Image quality evaluation metrics
 ├── visualizer.py           # Visualization utilities
 ├── utils.py                # Helper functions
@@ -58,7 +49,7 @@ image_compression_project/
 │   ├── compressed/
 │   ├── plots/
 │   └── reports/
-├── requirements.txt        # Python dependencies
+├── requirements.txt        # Dependencies
 └── README.md               # Project documentation
 
 ````
@@ -67,29 +58,17 @@ image_compression_project/
 
 ## 🚀 Installation
 
-### Step 1: Clone or Download
-Download the project folder or clone the repository.
+### Step 1: Project Setup
+- Create a new project folder
+- Copy all Python scripts into it
+- Create two subfolders:
+  - `images/`
+  - `output/`
+- Place test images inside the `images/` folder
 
 ### Step 2: Install Dependencies
 ```bash
 pip install -r requirements.txt
-
-or use anaconda for better execution
-after that install 
-(base) PS D:\filter project> C:/Users/user/anaconda3/Scripts/activate
-(base) PS D:\filter project> conda activate base
-(base) PS D:\filter project> conda install -c conda-forge opencv
-
-## one by one install libraries
-conda install -c conda-forge opencv
-conda install numpy
-conda install matplotlib
-conda install scipy
-conda install pillow
-
-
-# All requested packages already installed.
-
 ````
 
 ---
@@ -139,18 +118,18 @@ metrics = evaluator.calculate_metrics(image, compressed)
 
 ## ⚙️ Parameters
 
-| Parameter    | Range                          | Default  | Description               |
-| ------------ | ------------------------------ | -------- | ------------------------- |
-| cutoff_ratio | 0.1 – 0.9                      | 0.3      | Frequency retention ratio |
-| filter_type  | ideal / gaussian / butterworth | gaussian | Low-pass filter type      |
-| jpeg_quality | 1 – 100                        | 85       | JPEG compression quality  |
-| order        | 1 – 10                         | 2        | Butterworth filter order  |
+| Parameter    | Range                          | Default  | Description                   |
+| ------------ | ------------------------------ | -------- | ----------------------------- |
+| cutoff_ratio | 0.1 – 0.9                      | 0.3      | Ratio of frequencies retained |
+| filter_type  | ideal / gaussian / butterworth | gaussian | Low-pass filter type          |
+| jpeg_quality | 1 – 100                        | 85       | JPEG compression quality      |
+| order        | 1 – 10                         | 2        | Butterworth filter order      |
 
 ---
 
 ## 📊 Output Files
 
-The system automatically generates:
+The system generates:
 
 * **Compressed images** → `output/compressed/`
 * **Quality metrics** → `output/*_metrics.txt`
@@ -163,10 +142,10 @@ The system automatically generates:
 
 | PSNR Range | Quality Assessment |
 | ---------- | ------------------ |
-| > 40 dB    | Excellent          |
-| 30–40 dB   | Good               |
+| > 40 dB    | Excellent quality  |
+| 30–40 dB   | Good quality       |
 | 20–30 dB   | Acceptable         |
-| < 20 dB    | Poor               |
+| < 20 dB    | Poor quality       |
 
 ---
 
@@ -175,13 +154,13 @@ The system automatically generates:
 ### Compression Pipeline
 
 1. **FFT Transformation**
-   Converts image from spatial domain to frequency domain
+   Convert image from spatial domain to frequency domain
 2. **Frequency Filtering**
-   Removes high-frequency components using low-pass filters
+   Apply low-pass filter to remove high-frequency components
 3. **Inverse FFT**
-   Reconstructs the image back to spatial domain
+   Reconstruct image back to spatial domain
 4. **Quantization**
-   Optional bit-depth reduction for further compression
+   Reduce bit depth for additional compression
 
 ---
 
@@ -194,66 +173,47 @@ F(u,v) = \sum_{x=0}^{M-1} \sum_{y=0}^{N-1} f(x,y) e^{-j2\pi(ux/M + vy/N)}
 
 **Mean Squared Error (MSE)**
 [
-MSE = \frac{1}{MN} \sum [I(i,j) - K(i,j)]^2
+MSE = \frac{1}{MN} \sum_{i,j} [I(i,j) - K(i,j)]^2
 ]
 
 **Peak Signal-to-Noise Ratio (PSNR)**
 [
-PSNR = 10 \cdot \log_{10}\left(\frac{MAX_I^2}{MSE}\right)
+PSNR = 10 \cdot \log_{10} \left( \frac{MAX_I^2}{MSE} \right)
 ]
-
----
-
-## 📝 Sample Results
-
-| Image      | Original Size | Compressed Size | Compression Ratio | PSNR    |
-| ---------- | ------------- | --------------- | ----------------- | ------- |
-| sample.jpg | 1024 KB       | 256 KB          | 75%               | 38.2 dB |
 
 ---
 
 ## 🧪 Test Suite
 
-Run all automated tests:
+Run all tests using:
 
 ```bash
 python test_compression.py
 ```
 
-Includes:
+Test coverage includes:
 
-* Cutoff ratio testing
-* Filter comparison
+* Cutoff ratio variation
+* Filter type comparison
 * Visualization validation
-* Metric verification
+* Metric consistency checks
 
 ---
 
 ## ⚠️ Limitations
 
-* Optimized primarily for **grayscale images**
-* High compression may introduce ringing artifacts
-* FFT processing can be computationally expensive for very large images
+* Currently optimized for **grayscale images**
+* Compression artifacts increase at aggressive cutoff ratios
+* Computationally intensive for very large images
 
 ---
 
 ## 🔮 Future Enhancements
 
-* Full **color image compression**
+* Color image compression
 * Real-time compression preview
 * Parallel FFT processing
-* Deep learning–based adaptive filter optimization
-
----
-
-## 👥 Project Team
-
-* **Hashir Imran** (242101025)
-* **Zafran Ajab** (242101002)
-* **Taimoor Noor Khan** (242101027)
-
-**Instructor:** Sir Engr. Muhammad Waqas
-**Institute:** Institute of Space Technology, KICSIT Kahuta Campus
+* Deep learning–based adaptive filter selection
 
 ---
 
@@ -265,17 +225,8 @@ Includes:
 
 ---
 
-> *In frequency space, less truly becomes more.*
+> *Compression is not about loss—it’s about knowing what truly matters.*
 
-```
 
----
-
-If you want next:
-- 📌 **IEEE-style report**
-- 📌 **Project presentation slides**
-- 📌 **Viva defense Q&A**
-- 📌 **GitHub-perfect badges & visuals**
-
-Just say the word—this project deserves a strong finish 🚀
+Just nudge me—this project already hums with purpose 🌙
 ```
